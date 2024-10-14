@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view:ToDoListPageXaml xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:ToDoApp.Views"
+             xmlns:viewModels="clr-namespace:ToDoApp.ViewModels"
+             xmlns:collections="clr-namespace:ToDoApp.ViewModels.Collections"
+             x:Class="ToDoApp.Views.ToDoListPage"
+             x:DataType="{x:Type viewModels:ToDoListPageViewModel}">
+    <Grid Margin="20, 10, 20, 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="Name:"/>
+            <Entry Placeholder="Enter list name"
+                   Text="{Binding Name}"/>
+            <Label Text="To do's:"
+                   Margin="0, 10, 0, 5"/>
+        </VerticalStackLayout>
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding ToDos}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="collections:ToDoItemViewModel">
+                    <Grid ColumnDefinitions="*, Auto"
+                          BackgroundColor="White">
+                        <FlexLayout Direction="Row"
+                                    AlignItems="Center"
+                                    JustifyContent="Start">
+                            <Label Text="-"/>
+                            <Label Text="{Binding Name}"
+                               Padding="5"
+                               FontAttributes="None"
+                               FontSize="Title"/>
+                        </FlexLayout>
+                        <Label Grid.Column="1"
+                               Text="✔️"
+                               FontSize="Subtitle"
+                               IsVisible="{Binding Done}"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" 
+                                   ItemSpacing="20">
+                </LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+        </CollectionView>
+        <VerticalStackLayout Grid.Row="2">
+            <Button Text="Add New Item"
+                    Command="{Binding AddToDoItemCommand}"/>
+            <Button Text="Save"
+                    Command="{Binding SaveCommand}"/>
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"/>
+        </VerticalStackLayout>
+    </Grid>
+</view:ToDoListPageXaml>

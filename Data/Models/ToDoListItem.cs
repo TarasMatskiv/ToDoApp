@@ -1,0 +1,12 @@
+﻿using SQLite;
+
+namespace ToDoApp.Data.Models
+{
+    public class ToDoListItem
+    {
+        [PrimaryKey]
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+    }
+}

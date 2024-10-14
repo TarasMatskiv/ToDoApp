@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view:HomePageXaml xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:viewModels="clr-namespace:ToDoApp.ViewModels"
+                   xmlns:view="clr-namespace:ToDoApp.Views"
+                   x:Class="ToDoApp.Views.HomePage"
+                   x:DataType="{x:Type viewModels:HomePageViewModel}"
+                   xmlns:collections="clr-namespace:ToDoApp.ViewModels.Collections"
+                   Title="">
+    <Grid Margin="20, 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="12*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Text="Your to do lists:" 
+               Margin="10"
+               Grid.Row="0"
+               HorizontalOptions="Center"/>
+        <CollectionView Grid.Row="1"
+                        VerticalOptions="Fill"  
+                        ItemsSource="{Binding List}"
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" 
+                                   ItemSpacing="20">
+                </LinearItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="collections:ToDoListItemViewModel">
+                    <Grid ColumnDefinitions="*, Auto"
+                          BackgroundColor="White">
+                        <FlexLayout Direction="Row"
+                                    AlignItems="Center"
+                                    JustifyContent="Start">
+                            <Label Text="-"/>
+                            <Label Text="{Binding Name}"
+                               Padding="5"
+                               FontAttributes="None"
+                               FontSize="Title"/>
+                        </FlexLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="2" 
+                Text="Add New List"
+                Command="{Binding AddCommand}"/>
+    </Grid>
+</view:HomePageXaml>

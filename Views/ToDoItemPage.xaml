@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<view:ToDoItemPageXaml xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:view="clr-namespace:ToDoApp.Views"
+                       xmlns:viewModels="clr-namespace:ToDoApp.ViewModels"
+                       x:Class="ToDoApp.Views.ToDoItemPage"
+                       x:DataType="{x:Type viewModels:ToDoItemPageViewModel}">    
+    <ScrollView>
+        <VerticalStackLayout Padding="20, 10">
+            <Label Text="Name:" />
+            <Entry Text="{Binding Name}" 
+                   Placeholder="Please type to do name"/>
+            <Label Text="Notes:" 
+                   Margin="0, 15, 0, 0"/>
+            <Entry Text="{Binding Notes}"
+                   Placeholder="Please type to do notes"/>
+            <FlexLayout Direction="Row"
+                        Margin="0, 15, 0, 0"
+                        AlignItems="Center"
+                        JustifyContent="SpaceBetween">
+                <Label Text="Done:"/>
+                <Switch IsToggled="{Binding Done}" />
+            </FlexLayout>
+            <Button Margin="10, 25, 10, 10" 
+                    Text="Save"
+                    Command="{Binding SaveCommand}"/>
+            <Button Text="Delete"
+                    Command="{Binding DeleteCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</view:ToDoItemPageXaml>
